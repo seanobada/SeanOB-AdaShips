@@ -10,6 +10,7 @@
 #include <string>
 #include <cstdlib>
 //#include "tile.h"
+#include "FileReader.h"
 
 struct worldParameters
 {
@@ -95,7 +96,8 @@ int main()
 	
 	std::string fileName = "adaship_config.ini";
 	BattleShips bs;
-	bs.readConfig(fileName);
+	FileReader FR;
+	FR.ReadFile(fileName);
 	//bs.menu();
 	bs.setUpBoard();
 	/*BattleShips BS;

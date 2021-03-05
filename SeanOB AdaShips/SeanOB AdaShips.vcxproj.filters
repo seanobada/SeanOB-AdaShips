@@ -32,10 +32,6 @@
     <None Include="adaship_config.ini" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="singleton2.txt" />
-    <Text Include="Text.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="Tile.h">
       <Filter>Header Files</Filter>
     </ClInclude>

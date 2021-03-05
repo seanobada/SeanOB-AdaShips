@@ -1,0 +1,89 @@
+class BattleShips
+{
+
+private:
+
+	char direction;
+	int length;
+	std::vector<int> boatRow;
+	std::vector<int> boatCol;
+	bool isSunk;
+	std::string name;
+
+protected:
+
+public:
+	struct Battleships(char dir, int length, std::vector<int>row, std::vector<int>col, bool sunk, std::string name)
+	{
+
+	}
+	int boardWidth;
+	int boardHeight;
+};
+
+using std::setw;
+
+char initial(const std::string& firstName) // function finds the initial character of the first name
+{
+	if (firstName.length() == 0)
+		return 'e';
+
+	std::cout << (char)toupper(firstName[0]);
+
+	for (int i = 1; i < firstName.length() - 1; i++) {
+		if (firstName[i] == ' ')
+			return (char)toupper(firstName[i + 1]);// makes initial upper case
+	}
+	return '.';
+}
+
+
+void fileRead(std::string fileName) // reads in file
+{
+	std::ifstream fin;
+	std::string line;
+	int lineCount = 1;
+	// Open an existing file
+	fin.open(fileName);
+	while (!fin.eof()) {
+		fin >> line;
+		std::replace(line.begin(), line.end(), ',', ' ');
+		if ((lineCount - 1) % 3 == 0) {
+			line = initial(line);
+		}
+		std::cout << std::left << setw(15) << line;
+		if (lineCount % 3 == 0) {
+			std::cout << std::endl;
+		}
+		lineCount++;
+	}
+}
+
+int DataFileParsing(void) 
+{ // prints formatted data with a defined with for the spacing
+	std::cout << "\nWelcome to Data File Parser";
+	std::cout << "\nInital" <<
+		setw(13) << "Last" <<
+		setw(17) << "Salary" <<
+		"\n--------" <<
+		setw(19) << "------------" <<
+		setw(16) << "------------\n";
+	fileRead("employeeInfo.txt"); // reading information from the file
+	return 0;
+}
+
+void main()
+{	
+	BattleShips BS;
+	BS.boardWidth = 10;
+	BS.boardHeight = 10;
+	
+	std::vector <std::string> boardSize;
+	
+
+	std::cout << "my array contains : ";
+	for (int& x : boardSize) { std::cout << ' ' << x; }
+
+	std::cout << "\n";
+	
+}

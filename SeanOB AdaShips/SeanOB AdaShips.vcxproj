@@ -140,7 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BattleShips.cpp" />
-    <ClCompile Include="Board.cpp" />
+    <ClCompile Include="board.cpp" />
     <ClCompile Include="FileReader.cpp" />
     <ClCompile Include="Tile.cpp" />
   </ItemGroup>
@@ -148,7 +148,7 @@
     <None Include="adaship_config.ini" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Board.h" />
+    <ClInclude Include="board.h" />
     <ClInclude Include="FileReader.h" />
     <ClInclude Include="Tile.h" />
   </ItemGroup>

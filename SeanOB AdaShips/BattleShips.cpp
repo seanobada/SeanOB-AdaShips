@@ -92,25 +92,14 @@ void playGame()
 }
 
 int main()
-{	
-	
+{		
 	std::string fileName = "adaship_config.ini";
+	FileReader::Instance().ReadFile(fileName);
+
 	BattleShips bs;
-	FileReader FR;
-	FR.ReadFile(fileName);
 	//bs.menu();
 	bs.setUpBoard();
-	/*BattleShips BS;
-	BS.boardWidth = 10;
-	BS.boardHeight = 10;
 	
-	std::vector <std::string> boardSize;
-	
-
-	std::cout << "my array contains : ";
-	for (int& x : boardSize) { std::cout << ' ' << x; }
-
-	std::cout << "\n";*/
 	
 }
 

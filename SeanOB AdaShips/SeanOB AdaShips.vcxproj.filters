@@ -21,10 +21,10 @@
     <ClCompile Include="Tile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Board.cpp">
+    <ClCompile Include="FileReader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="FileReader.cpp">
+    <ClCompile Include="board.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -35,10 +35,10 @@
     <ClInclude Include="Tile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Board.h">
+    <ClInclude Include="FileReader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="FileReader.h">
+    <ClInclude Include="board.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

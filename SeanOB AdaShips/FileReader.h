@@ -5,6 +5,8 @@
 #include <vector>
 #include <sstream>
 
+#include "GameRules.h"
+
 class FileReader
 {
 private:
@@ -29,7 +31,7 @@ public:
 		return instance;
 	}
 
-	void ReadFile(std::string filename);
+	GameRules ReadFile(std::string filename);
 	std::string split(std::string source, char delimiter, int index);
 	std::string trim(std::string source);
 

@@ -5,7 +5,7 @@ class Tile
 private:
 	char tileValue = '~';
 		//"D S C P B M" ~ H X 
-	bool isRevealed = false;
+	bool isRevealed = true;
 public:
 	char GetTileValue();
 	void SetTileValue(char newTileValue);

@@ -1,4 +1,5 @@
 #include "FileReader.h"
+#include "GameRules.h"
 
 std::string FileReader::trim(std::string source)
 {
@@ -18,8 +19,9 @@ std::string FileReader::split(std::string source, char delimiter, int index)
 	return results[index];
 }
 
-void FileReader::ReadFile(std::string filename)
+GameRules FileReader::ReadFile(std::string filename)
 {
+	GameRules gameRules;
 	configFile.open(filename);
 	while (!configFile.eof())
 	{
@@ -36,23 +38,19 @@ void FileReader::ReadFile(std::string filename)
 
 		if (control == "Board")
 		{
-			boardWidth = std::stoi(split(value, 'x', 0));
-			boardHeight = std::stoi(split(value, 'x', 1));
-			//std::cout << " - Board size is : " << /*split(value, 'x', 0) << split(*/value/*, 'x', 1)*/;
-			//std::cout << boardHeight << boardWidth;
+			gameRules.boardWidth = std::stoi(split(value, 'x', 0));
+			gameRules.boardHeight = std::stoi(split(value, 'x', 1));
+
 		}
 		if (control == "Boat")
 		{
-			boatname = split(value, ',', 0);
-			boatsize = std::stoi(split(value, ',', 1));
-			//std::cout << boatsize;
-
-			//	addBoat(boatname, boatsize);
-			//std::cout << "\nfound a boat: " << boatname << ", size: " << boatsize << std::endl;
+			BoatData bd{split(value, ',', 0), std::stoi(split(value, ',', 1)) };
+			gameRules.boatDatas.push_back(bd);
 		}
 
 	}
 	configFile.close();
+	return gameRules;
 }
 
 

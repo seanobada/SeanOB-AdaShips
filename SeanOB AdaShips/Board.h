@@ -10,9 +10,10 @@ class Board
 private:
 
 	std::vector<std::vector<Tile>> board;
+	std::vector<Boat> boats;
 	int rows, cols;
 public:
 	void setUpBoard(int width, int height);
-	void printBoard();
+	void PrintBoard();
 };
 

@@ -9,6 +9,7 @@ private:
 	int size;
 	std::string name;
 	bool isDestroyed;
-	
+public:
+	void SetBoatPosition(int coordX, int coordY);
 };
 

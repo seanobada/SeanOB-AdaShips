@@ -2,6 +2,7 @@
 
 #include "GameRules.h"
 #include "Board.h"
+#include "Boat.h"
 
 
 class Game
@@ -12,5 +13,6 @@ private:
 	Board AiBoard;
 public:
 	void SetUpGame(GameRules gameRules);
+
 };
 

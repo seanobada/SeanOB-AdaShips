@@ -9,7 +9,8 @@
 #include "FileReader.h"
 #include "Board.h"
 #include "GameRules.h"
-
+#include "Game.h"
+#include "Coordinate.h"
 
 
 int main()
@@ -17,15 +18,11 @@ int main()
 	std::string fileName = "adaship_config.ini";
 
 	GameRules gameRules = FileReader::Instance().ReadFile(fileName);
-	//for (size_t i = 0; i < gameRules.boatDatas.size(); i++)
-	//{
-	//	std::cout << gameRules.boatDatas[i].name;
-	//	std::cout << gameRules.boatDatas[i].size << std::endl;
-	//}
 
+
+	Game game;
 	
-	
-	
+	game.SetUpGame(gameRules);
 
 }
 

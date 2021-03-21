@@ -44,7 +44,7 @@ GameRules FileReader::ReadFile(std::string filename)
 		}
 		if (control == "Boat")
 		{
-			BoatData bd{split(value, ',', 0), std::stoi(split(value, ',', 1)) };
+			BoatData bd{split(value, ',', 0), std::stoi(split(value, ',', 1)), split(value, ',', 2)[0] };
 			gameRules.boatDatas.push_back(bd);
 		}
 

@@ -29,21 +29,22 @@ void Board::setUpBoard(int width, int height)
 void Board::PrintBoard()
 {
 	Coordinate C;
-	std::cout << std::endl << std::setw(7);
+	std::cout << std::endl << std::setw(7) << ""; 
 	for (size_t i = 0; i < cols; i++)
 	{
 		C.x = i;
-		std::cout << FileReader::Instance().split(C.ToBoardCoord(), ',', 0) << "|";
+		std::cout << std::setw(2) << FileReader::Instance().split(C.ToBoardCoord(), ',', 0) << " |";
 	}
-	std::cout << std::endl;
+	std::cout << std::endl;	
+
 	
 	for (int x = 0, cnt = 1; x < rows; x++)
 	{
 		C.y = x;
-		std::cout << std::setw(5) << FileReader::Instance().split(C.ToBoardCoord(), ',', 1) << "|";
+		std::cout << std::setw(5) << FileReader::Instance().split(C.ToBoardCoord(), ',', 1) << " | ";
 		for (int y = 0; y < cols; y++)
 		{
-			std::cout << std::setw(2) << board[x][y].GetTileValue() << "|";
+			std::cout << std::setw(1) << board[x][y].GetTileValue() << " | ";
 		}
 		std::cout << std::endl;
 	}

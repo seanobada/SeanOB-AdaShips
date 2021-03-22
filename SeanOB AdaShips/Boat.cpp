@@ -25,7 +25,22 @@ bool Boat::GetIsVertical()
 	return isVertical;
 }
 
+void Boat::SetSize(int size)
+{
+	this->size = size;
+}
+
 int Boat::GetSize()
 {
 	return size;
+}
+
+void Boat::SetName(std::string name)
+{
+	this->name = name;
+}
+
+std::string Boat::GetName()
+{
+	return name;
 }

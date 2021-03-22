@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "PlayerTurn.h"
+#include "Tile.h"
 
 
 void PlayerTurn::DoTurn(Board& opponentBoard)
@@ -37,9 +38,36 @@ void PlayerTurn::DoBoatPlacement(Board& ownBoard, GameRules gameRules)
 		std::cin >> userInput;
 		isVertical = userInput[0] == 'V';
 
-		
-		
+		Boat newBoat;
+		newBoat.SetPosition({ X,Y });
+		newBoat.SetIsVertical(isVertical);
+		newBoat.SetSize(gameRules.boatDatas[i].size);
+		newBoat.SetName(gameRules.boatDatas[i].name);
+		if (ownBoard.IsBoatPositionValid(newBoat) == false)
+		{
+			std::cout << "Invalid Position!" << std::endl;
+		}
+		else
+		{
 
+			ownBoard.AddBoat(newBoat);
+			Coordinate currentCoord{newBoat.GetPosition().x,newBoat.GetPosition().y};
 
+			for (size_t j = 0; j < newBoat.GetSize(); j++)
+			{
+				ownBoard.GetTileAtCoord(currentCoord).SetTileValue(gameRules.boatDatas[i].character);
+				if (newBoat.GetIsVertical() == true) 
+				{
+					currentCoord.y++;
+				
+				}
+				else
+				{
+					currentCoord.x++;
+				}
+				
+			}
+			
+		}
 	}
 }

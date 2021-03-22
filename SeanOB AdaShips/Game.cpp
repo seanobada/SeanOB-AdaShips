@@ -10,7 +10,8 @@ void Game::SetUpGame(GameRules gameRules)
 {
 	board1.setUpBoard(gameRules.boardWidth, gameRules.boardHeight);
 	board2.setUpBoard(gameRules.boardWidth, gameRules.boardHeight);
-	
+	turn1->DoBoatPlacement(board1, gameRules);
+	turn2->DoBoatPlacement(board2, gameRules);
 	
 }
 

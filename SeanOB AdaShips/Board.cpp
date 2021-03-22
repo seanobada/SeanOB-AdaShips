@@ -122,12 +122,22 @@ bool Board::CheckBoatCollision(Boat boat1, Boat boat2)
 		maxBounds2.y = boat2.GetPosition().y + (boat2.GetSize() - 1);
 	}
 
-	if (minBounds1.x < maxBounds2.x &&
-		maxBounds1.x > minBounds2.x &&
-		minBounds1.y < maxBounds2.y &&
-		maxBounds1.y > minBounds2.y)
+	if (minBounds1.x <= maxBounds2.x &&
+		maxBounds1.x >= minBounds2.x &&
+		minBounds1.y <= maxBounds2.y &&
+		maxBounds1.y >= minBounds2.y)
 	{
 		return true;
 	}
 	return false;
+}
+
+void Board::AddBoat(Boat boat)
+{
+	boats.push_back(boat);
+}
+
+Tile& Board::GetTileAtCoord(Coordinate coord)
+{
+	return board[coord.y][coord.x];
 }

@@ -18,6 +18,8 @@ public:
 	int BoatsRemaining();
 	bool IsBoatPositionValid(Boat boat);
 	bool CheckBoatCollision(Boat boat1, Boat boat2);
+	void AddBoat(Boat boat);
+	Tile& GetTileAtCoord(Coordinate coord);
 	
 };
 

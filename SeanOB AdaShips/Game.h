@@ -3,16 +3,24 @@
 #include "GameRules.h"
 #include "Board.h"
 #include "Boat.h"
-
+#include "Turn.h"
 
 class Game
 {
 private:
 	bool isPlayerTurn = true;
-	Board PlayerBoard;
-	Board AiBoard;
+	Board board1;
+	Board board2;
+	Turn* turn1;
+	Turn* turn2;
+
 public:
+	bool closeGame = false;
 	void SetUpGame(GameRules gameRules);
+	void Menu();
+	void Gameloop();
+	void FinishGame();
+	
 
 };
 

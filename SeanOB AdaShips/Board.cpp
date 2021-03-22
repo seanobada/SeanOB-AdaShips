@@ -49,3 +49,85 @@ void Board::PrintBoard()
 		std::cout << std::endl;
 	}
 }
+int Board::BoatsRemaining()
+{
+	int boatsCount = 0;
+	for (size_t i = 0; i < boats.size(); i++)
+	{
+		if (boats[i].GetIsDestroyed() == false)
+		{
+			boatsCount++;
+		}
+		
+	}
+	return boatsCount;
+}
+
+bool Board::IsBoatPositionValid(Boat boat)
+{
+	Coordinate minBounds = boat.GetPosition();
+	Coordinate maxBounds;
+	if (boat.GetIsVertical() == false)
+	{
+		maxBounds.x = boat.GetPosition().x + (boat.GetSize() - 1);
+		maxBounds.y = boat.GetPosition().y;
+	}
+	else
+	{
+		maxBounds.x = boat.GetPosition().x;
+		maxBounds.y = boat.GetPosition().y + (boat.GetSize() - 1);
+	}
+
+	if (minBounds.x < 0 || minBounds.y < 0 || maxBounds.x > (cols - 1) || maxBounds.y > (rows - 1))
+	{
+		return false;
+	}
+
+	for (size_t i = 0; i < boats.size(); i++)
+	{
+		if (CheckBoatCollision(boat, boats[i]) == true)
+		{
+			return false;
+		}
+	
+	}
+	return true;
+}
+
+bool Board::CheckBoatCollision(Boat boat1, Boat boat2)
+{
+	Coordinate minBounds1 = boat1.GetPosition();
+	Coordinate maxBounds1;
+	if (boat1.GetIsVertical() == false)
+	{
+		maxBounds1.x = boat1.GetPosition().x + (boat1.GetSize() - 1);
+		maxBounds1.y = boat1.GetPosition().y;
+	}
+	else
+	{
+		maxBounds1.x = boat1.GetPosition().x;
+		maxBounds1.y = boat1.GetPosition().y + (boat1.GetSize() - 1);
+	}
+
+	Coordinate minBounds2 = boat2.GetPosition();
+	Coordinate maxBounds2;
+	if (boat2.GetIsVertical() == false)
+	{
+		maxBounds2.x = boat2.GetPosition().x + (boat2.GetSize() - 1);
+		maxBounds2.y = boat2.GetPosition().y;
+	}
+	else
+	{
+		maxBounds2.x = boat2.GetPosition().x;
+		maxBounds2.y = boat2.GetPosition().y + (boat2.GetSize() - 1);
+	}
+
+	if (minBounds1.x < maxBounds2.x &&
+		maxBounds1.x > minBounds2.x &&
+		minBounds1.y < maxBounds2.y &&
+		maxBounds1.y > minBounds2.y)
+	{
+		return true;
+	}
+	return false;
+}

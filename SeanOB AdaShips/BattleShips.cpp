@@ -21,8 +21,13 @@ int main()
 
 
 	Game game;
-	
-	game.SetUpGame(gameRules);
-
+	game.Menu();
+	if (game.closeGame == false)
+	{
+		game.SetUpGame(gameRules);
+		game.Gameloop();
+	}
+	game.FinishGame();
+	exit(0);
 }
 

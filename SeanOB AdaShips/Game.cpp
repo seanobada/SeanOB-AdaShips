@@ -2,34 +2,65 @@
 #include "GameRules.h"
 #include "Board.h"
 #include "Boat.h"
+#include "Turn.h"
+#include "PlayerTurn.h"
+#include "AiTurn.h"
 
 void Game::SetUpGame(GameRules gameRules)
 {
-	PlayerBoard.setUpBoard(gameRules.boardWidth, gameRules.boardHeight);
-	AiBoard.setUpBoard(gameRules.boardWidth, gameRules.boardHeight);
-	for (size_t i = 0; i < gameRules.boatDatas.size(); i++)
+	board1.setUpBoard(gameRules.boardWidth, gameRules.boardHeight);
+	board2.setUpBoard(gameRules.boardWidth, gameRules.boardHeight);
+	
+	
+}
+
+void Game::Menu()
+{
+	int menuInput;
+	std::cout << "Welcome to AdaShips! By Sean O'Brien" << std::endl;
+	std::cout << "1 : User vs Ai" << std::endl;
+	std::cout << "2 : User vs User" << std::endl;
+	std::cout << "3 : Ai vs Ai" << std::endl;
+	std::cout << "0 : Quit" << std::endl;
+	std::cout << "Enter a value to select Gamemode or (0) to quit:";
+	std::cin >> menuInput;
+	if (menuInput == 1)
 	{
-		PlayerBoard.PrintBoard();
-		int X, Y;
-		bool isVertical;
-
-		std::string userInput;
-		std::cout << std::endl << "This is the " << gameRules.boatDatas[i].name << " |";
-
-		for (size_t j = 0; j < gameRules.boatDatas[i].size; j++)
-		{
-			std::cout << gameRules.boatDatas[i].character << "|";
-		}
-		std::cout << std::endl;
-		std::cout << "Enter X coord for " << gameRules.boatDatas[i].name << " position: ";
-		std::cin >> userInput;
-		
-		std::cout << "Enter Y coord for " << gameRules.boatDatas[i].name << " position: ";
-		std::cin >> userInput;
-		std::cout << "Enter V or H for the orientation of the boat: ";
-		std::cin >> userInput;
-
+		turn1 = new PlayerTurn();
+		turn2 = new AiTurn();
+		// Gameloop();
 	}
+	if (menuInput == 2)
+	{
+		turn1 = new PlayerTurn();
+		turn2 = new PlayerTurn();
+		// Gameloop();
+	}
+	if (menuInput == 3)
+	{
+		turn1 = new AiTurn();
+		turn2 = new AiTurn();
+		// Gameloop();
+	}
+	if (menuInput == 0)
+	{
+		closeGame = true;
+	}
+}
+
+void Game::Gameloop()
+{
+	while (true)
+	{
+		turn1->DoTurn(board2);
+		turn2->DoTurn(board1);
+	}
+}
+
+void Game::FinishGame()
+{
+	delete turn1;
+	delete turn2;
 }
 
 

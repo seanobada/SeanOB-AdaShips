@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AiTurn.cpp" />
     <ClCompile Include="BattleShips.cpp" />
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="Boat.cpp" />
@@ -147,12 +148,15 @@
     <ClCompile Include="FileReader.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameRules.cpp" />
+    <ClCompile Include="PlayerTurn.cpp" />
     <ClCompile Include="Tile.cpp" />
+    <ClCompile Include="Turn.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="adaship_config.ini" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AiTurn.h" />
     <ClInclude Include="Board.h" />
     <ClInclude Include="Boat.h" />
     <ClInclude Include="BoatData.h" />
@@ -160,7 +164,9 @@
     <ClInclude Include="FileReader.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameRules.h" />
+    <ClInclude Include="PlayerTurn.h" />
     <ClInclude Include="Tile.h" />
+    <ClInclude Include="Turn.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

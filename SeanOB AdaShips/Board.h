@@ -15,5 +15,9 @@ private:
 public:
 	void setUpBoard(int width, int height);
 	void PrintBoard();
+	int BoatsRemaining();
+	bool IsBoatPositionValid(Boat boat);
+	bool CheckBoatCollision(Boat boat1, Boat boat2);
+	
 };
 

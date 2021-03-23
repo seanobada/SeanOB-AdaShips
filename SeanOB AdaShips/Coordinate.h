@@ -8,6 +8,7 @@ struct Coordinate
 	Coordinate(int newX, int newY);
 	Coordinate();
 	std::string ToBoardCoord();
+	void SetBoardCoord(std::string x, std::string y);
 
 };
 

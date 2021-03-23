@@ -15,3 +15,18 @@ bool Tile::GetIsRevealed()
 	
 	return isRevealed;
 }
+
+void Tile::SetIsRevealed(bool v)
+{
+	isRevealed = v;
+}
+
+bool Tile::GetIsDamaged()
+{
+	return isDamaged;
+}
+
+void Tile::SetIsDamaged(bool isDamaged)
+{
+	this->isDamaged = isDamaged;
+}

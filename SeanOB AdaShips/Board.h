@@ -20,6 +20,7 @@ public:
 	bool CheckBoatCollision(Boat boat1, Boat boat2);
 	void AddBoat(Boat boat);
 	Tile& GetTileAtCoord(Coordinate coord);
-	
+	int GetWidth();
+	int GetHeight();
 };
 

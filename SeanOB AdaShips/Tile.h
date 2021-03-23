@@ -4,12 +4,17 @@ class Tile
 {
 private:
 	char tileValue = '~';
-		//"D S C P B M" ~ H X 
-	bool isRevealed = true;
+		//"D S C P B M" ~  X 
+	bool isRevealed = true; //TODO change to false once ready
+	bool isDamaged = false;
 public:
 	char GetTileValue();
 	void SetTileValue(char newTileValue);
 	bool GetIsRevealed();
+	void SetIsRevealed(bool v);
+	bool GetIsDamaged();
+	void SetIsDamaged(bool isDamaged);
+	
 
 };
 

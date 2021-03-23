@@ -141,3 +141,12 @@ Tile& Board::GetTileAtCoord(Coordinate coord)
 {
 	return board[coord.y][coord.x];
 }
+
+int Board::GetWidth()
+{
+	return cols;
+}
+int Board::GetHeight()
+{
+	return rows;
+}

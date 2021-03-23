@@ -34,3 +34,17 @@ std::string Coordinate::ToBoardCoord()
     output = xCoord + ',' + yCoord;
     return output;
 }
+
+void Coordinate::SetBoardCoord(std::string x, std::string y)
+{
+    this->y = std::stoi(y) - 1;
+
+    int total = 0;
+    for (int i = (x.length()-1); i >= 0; i--)
+    {
+        int decimal = x[i] - 'A' + 1;
+        int holdingValue = decimal* pow(26, i);
+        total += holdingValue;
+    }
+    this->x = total - 1;
+}

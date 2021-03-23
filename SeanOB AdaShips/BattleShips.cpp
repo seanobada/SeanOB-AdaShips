@@ -19,7 +19,6 @@ int main()
 
 	GameRules gameRules = FileReader::Instance().ReadFile(fileName);
 
-
 	Game game;
 	game.Menu();
 	if (game.closeGame == false)

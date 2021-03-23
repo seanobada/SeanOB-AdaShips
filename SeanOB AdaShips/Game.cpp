@@ -53,8 +53,10 @@ void Game::Gameloop()
 {
 	while (true)
 	{
+		board2.PrintBoard();
 		turn1->DoTurn(board2);
-		turn2->DoTurn(board1);
+		/*board1.PrintBoard();
+		turn2->DoTurn(board1);*/
 	}
 }
 

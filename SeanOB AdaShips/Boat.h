@@ -14,6 +14,7 @@ public:
 	void SetPosition(Coordinate coord);
 	Coordinate GetPosition();
 	bool GetIsDestroyed();
+	void SetIsDestroyed(bool isDestroyed);
 	void SetIsVertical(bool value);
 	bool GetIsVertical();
 	void SetSize(int size);

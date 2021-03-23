@@ -1,6 +1,6 @@
 #include "Turn.h"
 
-void Turn::DoTurn(Board& opponentBoard)
+void Turn::DoTurn(Board& opponentBoard, int salvoCount)
 {
 
 }

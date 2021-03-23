@@ -5,7 +5,7 @@ class Tile
 private:
 	char tileValue = '~';
 		//"D S C P B M" ~  X 
-	bool isRevealed = true; //TODO change to false once ready
+	bool isRevealed = true;
 	bool isDamaged = false;
 public:
 	char GetTileValue();

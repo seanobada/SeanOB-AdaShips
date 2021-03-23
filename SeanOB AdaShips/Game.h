@@ -13,6 +13,7 @@ private:
 	Board board2;
 	Turn* turn1;
 	Turn* turn2;
+	bool salvoMode = false;
 
 public:
 	bool closeGame = false;
@@ -20,7 +21,5 @@ public:
 	void Menu();
 	void Gameloop();
 	void FinishGame();
-	
-
 };
 

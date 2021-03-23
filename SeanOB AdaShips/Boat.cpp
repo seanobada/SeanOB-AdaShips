@@ -15,6 +15,11 @@ bool Boat::GetIsDestroyed()
 	return isDestroyed;
 }
 
+void Boat::SetIsDestroyed(bool isDestroyed)
+{
+	this->isDestroyed = true;
+}
+
 void Boat::SetIsVertical(bool value)
 {
 	isVertical = value;

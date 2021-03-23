@@ -44,7 +44,14 @@ void Board::PrintBoard()
 		std::cout << std::setw(5) << FileReader::Instance().split(C.ToBoardCoord(), ',', 1) << " | ";
 		for (int y = 0; y < cols; y++)
 		{
-			std::cout << std::setw(1) << board[x][y].GetTileValue() << " | ";
+			if (board[x][y].GetIsRevealed() == true)
+			{
+				std::cout << std::setw(1) << board[x][y].GetTileValue() << " | ";
+			}
+			else
+			{
+				std::cout << std::setw(1) << '~' << " | ";
+			}
 		}
 		std::cout << std::endl;
 	}
@@ -149,4 +156,100 @@ int Board::GetWidth()
 int Board::GetHeight()
 {
 	return rows;
+}
+
+Boat* Board::GetBoatAtCoord(Coordinate coord)
+{
+	for (size_t i = 0; i < boats.size(); i++)
+	{
+		Coordinate minBounds = boats[i].GetPosition();
+		Coordinate maxBounds;
+		if (boats[i].GetIsVertical() == false)
+		{
+			maxBounds.x = boats[i].GetPosition().x + (boats[i].GetSize() - 1);
+			maxBounds.y = boats[i].GetPosition().y;
+		}
+		else
+		{
+			maxBounds.x = boats[i].GetPosition().x;
+			maxBounds.y = boats[i].GetPosition().y + (boats[i].GetSize() - 1);
+		}
+
+		if (minBounds.x <= coord.x &&
+			maxBounds.x >= coord.x &&
+			minBounds.y <= coord.y &&
+			maxBounds.y >= coord.y)
+		{
+			return &boats[i];
+		}
+	}
+	return nullptr;
+}
+
+bool Board::CheckBoatDestroyed(Boat boat)
+{
+	Coordinate c;
+	c = boat.GetPosition();
+	for (size_t i = 0; i < boat.GetSize(); i++)
+	{
+		if (board[c.y][c.x].GetIsDamaged() == false)
+		{
+			return false;
+		}
+
+		if (boat.GetIsVertical() == true)
+		{
+			c.y += 1;
+		}
+		else
+		{
+			c.x += 1;
+		}
+	}
+	return true;
+}
+
+void Board::RevealBoat(Boat boat)
+{
+	Coordinate c;
+	c = boat.GetPosition();
+	for (size_t i = 0; i < boat.GetSize(); i++)
+	{
+		board[c.y][c.x].SetTileValue(boat.GetName()[0]);
+		if (boat.GetIsVertical() == true)
+		{
+			c.y += 1;
+		}
+		else
+		{
+			c.x += 1;
+		}
+	}
+}
+
+int Board::GetUndamagedTilesCount()
+{
+	int totalAliveTiles = 0;
+	for (size_t x = 0; x < rows; x++)
+	{
+		for (size_t y = 0; y < cols; y++)
+		{
+			if (board[x][y].GetIsDamaged() == false)
+			{
+				totalAliveTiles++;
+			}
+		}
+	}
+	return totalAliveTiles;
+}
+
+void Board::Unreveal()
+{
+	for (size_t x = 0; x < rows; x++)
+	{
+		for (size_t y = 0; y < cols; y++)
+		{
+			board[x][y].SetIsRevealed(false);
+		}
+	}
 }

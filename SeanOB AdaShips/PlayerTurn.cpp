@@ -1,44 +1,95 @@
 #include <iostream>
+#include <chrono>
+#include <thread>
 
 #include "PlayerTurn.h"
 #include "Tile.h"
+#include "FileReader.h"
 
 
-void PlayerTurn::DoTurn(Board& opponentBoard)
+void PlayerTurn::DoTurn(Board& opponentBoard, int salvoCount)
 {
-	//enter coord value, test coord value as valid(not hit before), response, change tile value depending on response 
+	std::vector<Coordinate> targetCoords;
 	Coordinate c;
 	std::string x, y;
 	bool isValidInput = true;
-	do
+
+	int numberOfTilesAlive = opponentBoard.GetUndamagedTilesCount();
+	if (salvoCount > numberOfTilesAlive)
 	{
-		isValidInput = true;
-		std::cout << "Enter X coord for your attack: ";
-		std::cin >> x;
+		salvoCount = numberOfTilesAlive;
+	}
 
-		std::cout << "Enter Y coord for your attack: ";
-		std::cin >> y;
-
-		c.SetBoardCoord(x, y);
-
-		if (c.x > opponentBoard.GetWidth() - 1 || c.y > opponentBoard.GetHeight() - 1 || c.x < 0 || c.y < 0)
+	for (size_t i = 0; i < salvoCount; i++)
+	{
+		do
 		{
-			std::cout << "Invalid input! Try again." << std::endl;
-			isValidInput = false;
-			continue;
-		}
-		if (opponentBoard.GetTileAtCoord(c).GetIsDamaged() == true)
+			isValidInput = true;
+			if (salvoCount > 1)
+			{
+				std::cout << "Number of salvos left: " << salvoCount - i << std::endl;
+			}
+			std::cout << "Enter X coord for your attack: ";
+			std::cin >> x;
+
+			std::cout << "Enter Y coord for your attack: ";
+			std::cin >> y;
+
+			std::cout << std::endl;
+			c.SetBoardCoord(x, y);
+
+			if (c.x > opponentBoard.GetWidth() - 1 || c.y > opponentBoard.GetHeight() - 1 || c.x < 0 || c.y < 0)
+			{
+				std::cout << "Invalid input! Try again." << std::endl;
+				isValidInput = false;
+				continue;
+			}
+			if (opponentBoard.GetTileAtCoord(c).GetIsDamaged() == true)
+			{
+				std::cout << "It's already been shot!" << std::endl;
+				isValidInput = false;
+			}
+			for (size_t i = 0; i < targetCoords.size(); i++)
+			{
+				if (c.x == targetCoords[i].x && c.y == targetCoords[i].y)
+				{
+					isValidInput = false;
+				}
+			}
+		} while (isValidInput == false);
+		targetCoords.push_back(c);
+	}
+
+	for (size_t i = 0; i < salvoCount; i++)
+	{
+		std::string currentBoardCoord = targetCoords[i].ToBoardCoord();
+		
+		std::cout << "Firing at (" << FileReader::Instance().split(currentBoardCoord, ',', 0) << ", " << FileReader::Instance().split(currentBoardCoord, ',', 1) << ")" << std::endl;
+		std::this_thread::sleep_for(std::chrono::seconds(1));
+
+		opponentBoard.GetTileAtCoord(targetCoords[i]).SetIsDamaged(true);
+		if (opponentBoard.GetTileAtCoord(targetCoords[i]).GetTileValue() != '~')
 		{
-			std::cout << "Invalid input! Try again." << std::endl;
-			isValidInput = false;
+			std::cout << "Hit!" << std::endl;
+			Boat* hitBoat = opponentBoard.GetBoatAtCoord(targetCoords[i]);
+			if (opponentBoard.CheckBoatDestroyed(*hitBoat) == true)
+			{
+				std::cout << "You have Destroyed " << hitBoat->GetName() << "!" << std::endl;
+				opponentBoard.RevealBoat(*hitBoat);
+				hitBoat->SetIsDestroyed(true);
+			}
+			else
+			{
+				opponentBoard.GetTileAtCoord(targetCoords[i]).SetTileValue('X');
+			}
 		}
-	} while (isValidInput == false);
-
-	opponentBoard.GetTileAtCoord(c).SetIsDamaged(true);
-	opponentBoard.GetTileAtCoord(c).SetTileValue('X');
-	opponentBoard.GetTileAtCoord(c).SetIsRevealed(true);
-
-
+		else
+		{
+			std::cout << "Miss!" << std::endl;
+			opponentBoard.GetTileAtCoord(targetCoords[i]).SetTileValue('W');
+		}
+		opponentBoard.GetTileAtCoord(targetCoords[i]).SetIsRevealed(true);
+	}
 }
 
 void PlayerTurn::DoBoatPlacement(Board& ownBoard, GameRules gameRules)
@@ -103,7 +154,3 @@ void PlayerTurn::DoBoatPlacement(Board& ownBoard, GameRules gameRules)
 		}
 	}
 }
-//TODO AI Positioning
-//TODO Targeting System for AI(logic + error handling) and Player(logic + error handling) + isDestroyed Condition Checking
-//TODO Win Conditions
-//TODO Slav mode

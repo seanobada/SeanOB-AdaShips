@@ -4,7 +4,7 @@
 class Turn
 {
 public:
-	virtual void DoTurn(Board& opponentBoard);
+	virtual void DoTurn(Board& opponentBoard,int salvoCount = 1);
 	virtual void DoBoatPlacement(Board& ownBoard, GameRules gamerules);
 };
 

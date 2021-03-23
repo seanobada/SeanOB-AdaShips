@@ -22,5 +22,10 @@ public:
 	Tile& GetTileAtCoord(Coordinate coord);
 	int GetWidth();
 	int GetHeight();
+	Boat* GetBoatAtCoord(Coordinate coord);
+	bool CheckBoatDestroyed(Boat boat); 
+	void RevealBoat(Boat boat);
+	int GetUndamagedTilesCount();
+	void Unreveal();
 };
 

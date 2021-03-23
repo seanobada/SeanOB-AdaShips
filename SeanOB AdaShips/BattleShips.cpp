@@ -15,6 +15,7 @@
 
 int main()
 {		
+	srand(time(NULL));
 	std::string fileName = "adaship_config.ini";
 
 	GameRules gameRules = FileReader::Instance().ReadFile(fileName);
@@ -29,4 +30,3 @@ int main()
 	game.FinishGame();
 	exit(0);
 }
-
